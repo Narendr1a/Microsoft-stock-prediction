@@ -5,8 +5,11 @@ Author: Narendra
 Author-email: bchoudhary47554@gmail.com
 Requires-Dist: pandas
 Requires-Dist: numpy
+Requires-Dist: scikit-learn
+Requires-Dist: statsmodels
+Requires-Dist: pyyaml
+Requires-Dist: flask
 Requires-Dist: matplotlib
-Requires-Dist: seaborn
 Dynamic: author
 Dynamic: author-email
 Dynamic: requires-dist

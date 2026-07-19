@@ -1,5 +1,8 @@
 pandas
 numpy
+scikit-learn
+statsmodels
+pyyaml
+flask
 matplotlib
-seaborn
 -e .
