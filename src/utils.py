@@ -128,13 +128,10 @@ def evaluate_arima_models(train_series, test_series, p_values, d_values, q_value
 
 
 def get_metrics(actual, predicted):
-    """
-    Returns a dict of common forecasting error metrics.
-    """
     try:
-        rmse = np.sqrt(mean_squared_error(actual, predicted))
-        mae = mean_absolute_error(actual, predicted)
-        mape = np.mean(np.abs((np.array(actual) - np.array(predicted)) / np.array(actual))) * 100
+        rmse = float(np.sqrt(mean_squared_error(actual, predicted)))
+        mae = float(mean_absolute_error(actual, predicted))
+        mape = float(np.mean(np.abs((np.array(actual) - np.array(predicted)) / np.array(actual))) * 100)
         return {"RMSE": rmse, "MAE": mae, "MAPE": mape}
     except Exception as e:
         raise CustomException(e, sys)
