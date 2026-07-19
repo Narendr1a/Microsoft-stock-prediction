@@ -1,0 +1,7 @@
+README.md
+setup.py
+Narendra.egg-info/PKG-INFO
+Narendra.egg-info/SOURCES.txt
+Narendra.egg-info/dependency_links.txt
+Narendra.egg-info/requires.txt
+Narendra.egg-info/top_level.txt
