@@ -1,10 +1,13 @@
+# ============================================================
 # CONFIG FILE — edit these values for your dataset
+# ============================================================
 
 data:
-  raw_data_path: "data/Microsoft_Stock.csv"
+  raw_data_path: "notebook/data/Microsoft_Stock.csv"  # <-- put your CSV here and update filename
   date_column: "Date"                   # name of the datetime column in your CSV
   target_column: "Close"                # name of the column you want to forecast
-  date_format: null                     # # e.g. "%Y-%m-%d" if auto-parse fails, else null
+  exog_columns: ["Volume", "Open", "High", "Low"]   # set to [] to fall back to plain ARIMA (no exog)
+  date_format: null                     # e.g. "%Y-%m-%d" if auto-parse fails, else null
 
 split:
   test_size: 0.2          # last 20% of the time series is used as test set (chronological, not random)
@@ -14,15 +17,23 @@ transformation:
   seasonal_period: 7            # e.g. 7 for weekly seasonality on daily data, 12 for monthly on yearly data
 
 model:
-  # ARIMA / SARIMAX search grid — kept small.
+  # ARIMA / SARIMAX search grid — kept small by default, expand if you want a deeper search
   p_values: [0, 1, 2]
   d_values: [0, 1]
   q_values: [0, 1, 2]
-  seasonal: false          # set true to use SARIMAX instead of ARIMA
+  seasonal: false          # set true to also fit a seasonal component
   forecast_horizon: 30     # how many steps ahead predict_pipeline.py forecasts by default
+
+future_exog:
+  # Future Volume/Open/High/Low are unknown at forecast time, same as the target itself.
+  # strategy: "last_value" carries the last observed exog row forward for every forecast step.
+  # This is a simplifying assumption, not a real prediction of future exog — see README.
+  strategy: "last_value"
 
 artifacts:
   model_path: "artifacts/model.pkl"
   transform_info_path: "artifacts/transform_info.pkl"
   train_data_path: "artifacts/train.csv"
   test_data_path: "artifacts/test.csv"
+  train_exog_path: "artifacts/train_exog.csv"
+  test_exog_path: "artifacts/test_exog.csv"
